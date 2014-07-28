@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Octopress
   unless defined? Octopress.config
     def self.config
