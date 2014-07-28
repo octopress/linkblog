@@ -1,6 +1,10 @@
-# Octopress Link Blog
+# Octopress Linkblog
 
 Adds link blogging features, along with some other niceties, to any Jekyll site.
+
+[![Build Status](https://travis-ci.org/octopress/linkblog.svg)](https://travis-ci.org/octopress/linkblog)
+[![Gem Version](http://img.shields.io/gem/v/octopress-linkblog.svg)](https://rubygems.org/gems/octopress-linkblog)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://octopress.mit-license.org)
 
 ## Installation
 
@@ -69,7 +73,7 @@ of post.
 
 ## Configuration
 
-In your site's `_octopress.yml` you can configure the Link Blog features. Here are the defaults.
+In your site's `_octopress.yml` you can configure the Linkblog features. Here are the defaults.
 
 ```ruby
 linkpost:
