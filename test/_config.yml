@@ -1,0 +1,14 @@
+# Site settings
+title: Your awesome title
+email: your-email@domain.com
+baseurl: ""
+url: "http://yourdomain.com"
+timezone: UTC
+
+exclude:
+  - Gemfile*
+
+# Build settings
+markdown: kramdown
+gems:
+  - octopress-linkblog

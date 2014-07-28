@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'octopress-linkblog', path: '../'
+gem 'octopress', path: '../../cli'
+gem 'octopress-hooks', path: '../../hooks'
+gem 'pry-debugger'
+gem 'clash'
