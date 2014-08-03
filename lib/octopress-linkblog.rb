@@ -3,7 +3,6 @@ require 'octopress-linkblog/configuration'
 require 'titlecase'
 
 require 'octopress-hooks'
-require 'jekyll'
 
 module Octopress
   module LinkBlog
