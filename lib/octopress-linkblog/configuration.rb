@@ -25,7 +25,8 @@ module Octopress
         },
 
         'titlecase' => true,
-        'unorphan'  => true
+        'unorphan'  => true,
+        'permalink_label' => 'Permalink'
       }
 
       def self.config

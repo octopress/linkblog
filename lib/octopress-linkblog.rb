@@ -45,6 +45,8 @@ module Octopress
         post.data['title_url']  = linkpost || post.url
         post.data['linkpost']   = !linkpost.nil?
         post.data['title_link'] = title_link(post.data)
+        post.data['permalink']  = link(LinkBlog.config['permalink_label'], post.url, 'article-permalink')
+ 
         post
       end
 
@@ -74,7 +76,11 @@ module Octopress
       def title_link(data)
         classname = "article-link"
         classname << " linkpost" if data['linkpost']
-        "<a href='#{data['title_url']}' class='#{classname}'>#{data['title_html']}</a>"
+        link(data['title_html'], data['title_url'], classname)
+      end
+
+      def link(title, url, classnames)
+        "<a href='#{url}' class='#{classnames}'>#{title}</a>"
       end
 
       def title_text(title, config)

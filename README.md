@@ -36,6 +36,7 @@ With the gem installed, your site's posts will automatically have new data attri
 - `post.title_text` - The post title with markers, but all in plain text (great for RSS).
 - `post.title_url` - The URL that post titles should link to.
 - `post.title_link` - A `<a>` tag filled with the `title_html` pointing to the `title_url`.
+- `post.permalink` - A `<a>` tag containing your configuration's `pearmalink_label` pointing to the post's URL.
 - `post.linkpost` - A boolean indicating whether the post is a link post.
 
 Here is an example. Given the following YAML front-matter:
@@ -55,6 +56,7 @@ title_html   => Cats Are&nbsp;Awesome&nbsp;<span class='post-marker post-marker-
 title_text   => Cats Are Awesome →
 title_url    => http://cats.example.com
 title_link   => <a href='http://cats.example.com' class='article-link linkpost'>...</a>
+permalink    => <a href='http://your-site.com/posts/1' class='permalink'>Permalink</a>
 linkpost     => true
 ```
 
@@ -85,6 +87,7 @@ posts:
 
 titlecase: true
 unorphan: true
+permalink_label: Permalink
 ```
 
 ## Contributing
