@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.0 - 2014-08-21
+
+- New: `page.title_html` outputs page title, titlecased and unorphaned.
+
 ### 1.1.0 - 2014-08-19
 
 - New: `post.permalink` outputs an anchor tag with a permanent link to post.
