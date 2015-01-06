@@ -1,6 +1,6 @@
 # Octopress Linkblog
 
-Adds link blogging features, along with some other niceties, to any Jekyll site.
+Adds link blogging features, along with some other niceties to any Jekyll site.
 
 [![Build Status](https://travis-ci.org/octopress/linkblog.svg)](https://travis-ci.org/octopress/linkblog)
 [![Gem Version](http://img.shields.io/gem/v/octopress-linkblog.svg)](https://rubygems.org/gems/octopress-linkblog)
@@ -8,22 +8,26 @@ Adds link blogging features, along with some other niceties, to any Jekyll site.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+### Using Bundler
 
-    gem 'octopress-linkblog'
+Add this gem to your site's Gemfile in the `:jekyll_plugins` group:
 
-And then execute:
+    group :jekyll_plugins do
+      gem 'octopress-linkblog'
+    end
+
+Then install the gem with Bundler
 
     $ bundle
 
-Or install it yourself as:
+### Manual Installation
 
     $ gem install octopress-linkblog
 
-Next add it to your gems list in Jekyll's `_config.yml`
+Then add the gem to your Jekyll configuration.
 
     gems:
-      - octopress-linkblog
+      -octopress-linkblog
 
 ## Usage
 
@@ -75,19 +79,20 @@ of post.
 
 ## Configuration
 
-In your site's `_octopress.yml` you can configure the Linkblog features. Here are the defaults.
+You can configure this plugin in your site's `_config.yml` under the `linkblog` key. Here are the defaults.
 
 ```ruby
-linkpost:
-  marker: →
-  marker_position: after
-posts:
-  marker: false
-  marker_position: before
+linkblog:
+  linkpost:
+    marker: →
+    marker_position: after
+  posts:
+    marker: false
+    marker_position: before
 
-titlecase: true
-unorphan: true
-permalink_label: Permalink
+  titlecase: true
+  unorphan: true
+  permalink_label: Permalink
 ```
 
 ## Contributing

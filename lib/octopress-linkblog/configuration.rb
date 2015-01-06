@@ -1,19 +1,9 @@
-# encoding: utf-8
-module Octopress
-  unless defined? Octopress.config
-    def self.config
-      file = '_octopress.yml'
-      if File.exist?(file)
-        SafeYAML.load_file(file) || {}
-      else
-        {}
-      end
-    end
-  end
+# encoding: UTF-8
 
-  module LinkBlog
-    module Configuration
-      DEFAULTS = {
+module Octopress
+  module Linkblog
+    DEFAULT_OPTIONS = {
+      'linkblog' => {
         'linkpost' => {
           'marker' => "→",
           'marker_position' => 'after'
@@ -28,10 +18,12 @@ module Octopress
         'unorphan'  => true,
         'permalink_label' => 'Permalink'
       }
+    }
 
-      def self.config
-        @config ||= Jekyll::Utils.deep_merge_hashes(DEFAULTS, Octopress.config)
-      end
+    def self.config(options={})
+      @config ||= Jekyll::Utils.deep_merge_hashes(DEFAULT_OPTIONS, options)
+      @config['linkblog']
     end
+
   end
 end

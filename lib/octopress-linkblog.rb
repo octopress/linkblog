@@ -5,13 +5,13 @@ require 'titlecase'
 require 'octopress-hooks'
 
 module Octopress
-  module LinkBlog
-
-    def self.config
-      LinkBlog::Configuration.config
-    end
+  module Linkblog
 
     class SiteHook < Hooks::Site
+      def pre_read(site)
+        Linkblog.config(site.config)
+      end
+
       def merge_payload(payload, site)
         {
           'site' => {
@@ -25,8 +25,8 @@ module Octopress
     class PageHook < Hooks::Page
       def post_init(page)
         if page.data['title']
-          page.data['title'].titlecase! if LinkBlog.config['titlecase']
-          page.data['title_html'] = LinkBlog.unorphan(page.data['title'])
+          page.data['title'].titlecase! if Linkblog.config['titlecase']
+          page.data['title_html'] = Linkblog.unorphan(page.data['title'])
         end
       end
     end
@@ -39,28 +39,28 @@ module Octopress
       def add_post_vars(post)
         linkpost = post.data['external-url']
 
-        post.data['title'].titlecase! if LinkBlog.config['titlecase']
+        post.data['title'].titlecase! if Linkblog.config['titlecase']
 
         if linkpost
-          config = LinkBlog.config['linkpost']
+          config = Linkblog.config['linkpost']
         else
-          config = LinkBlog.config['post']
+          config = Linkblog.config['post']
         end
 
-        post.data['title_text'] = LinkBlog.post_title_text(post.data['title'], config)
-        post.data['title_html'] = LinkBlog.post_title_html(post.data['title'], config)
+        post.data['title_text'] = Linkblog.post_title_text(post.data['title'], config)
+        post.data['title_html'] = Linkblog.post_title_html(post.data['title'], config)
         post.data['title_url']  = linkpost || post.url
         post.data['linkpost']   = !linkpost.nil?
-        post.data['title_link'] = LinkBlog.post_title_link(post.data)
-        post.data['permalink']  = LinkBlog.post_link(LinkBlog.config['permalink_label'], post.url, 'article-permalink')
- 
+        post.data['title_link'] = Linkblog.post_title_link(post.data)
+        post.data['permalink']  = Linkblog.post_link(Linkblog.config['permalink_label'], post.url, 'article-permalink')
+
         post
       end
 
     end
 
     def self.unorphan(title)
-      if LinkBlog.config['unorphan']
+      if Linkblog.config['unorphan']
         title.sub(/\s+(\S+)\s*$/, '&nbsp;\1')
       else
         title
@@ -105,5 +105,16 @@ module Octopress
       end
     end
   end
+end
+
+if defined? Octopress::Docs
+  Octopress::Docs.add({
+    name:        "Octopress Linkblog",
+    gem:         "octopress-linkblog",
+    description: "Add link-blogging features to any Jekyll site",
+    path:        File.expand_path(File.join(File.dirname(__FILE__), "../")),
+    source_url:  "https://github.com/octopress/linkblog",
+    version:     Octopress::Linkblog::VERSION
+  })
 end
 

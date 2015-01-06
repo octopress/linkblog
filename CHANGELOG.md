@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.0.0 - 2015-01-06
+
+- Breaking: Configuration is now set in _config.yml beneath the `linkblog` key.
+- Improved configuration management.
+- Support for Octopress Docs.
+
 ### 1.2.0 - 2014-08-21
 
 - New: `page.title_html` outputs page title, titlecased and unorphaned.

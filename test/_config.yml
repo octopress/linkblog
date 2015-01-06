@@ -12,3 +12,7 @@ exclude:
 markdown: kramdown
 gems:
   - octopress-linkblog
+
+linkblog:
+  post:
+    marker: ★
