@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.0.1 - 2015-01-06
+- Fix: Added support for site baseurl configuration.
+
 ### 2.0.0 - 2015-01-06
 
 - Breaking: Configuration is now set in _config.yml beneath the `linkblog` key.
