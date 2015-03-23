@@ -1,7 +1,7 @@
 # Site settings
 title: Your awesome title
 email: your-email@domain.com
-baseurl: ""
+baseurl: "food"
 url: "http://yourdomain.com"
 timezone: UTC
 
