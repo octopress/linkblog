@@ -47,12 +47,14 @@ module Octopress
           config = Linkblog.config['post']
         end
 
+        post_url = File.join('/',post.site.config['baseurl'], post.url)
+
         post.data['title_text'] = Linkblog.post_title_text(post.data['title'], config)
         post.data['title_html'] = Linkblog.post_title_html(post.data['title'], config)
-        post.data['title_url']  = linkpost || post.url
+        post.data['title_url']  = linkpost || post_url
         post.data['linkpost']   = !linkpost.nil?
         post.data['title_link'] = Linkblog.post_title_link(post.data)
-        post.data['permalink']  = Linkblog.post_link(Linkblog.config['permalink_label'], post.url, 'article-permalink')
+        post.data['permalink']  = Linkblog.post_link(Linkblog.config['permalink_label'], post_url, 'article-permalink')
 
         post
       end
