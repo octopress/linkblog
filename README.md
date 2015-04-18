@@ -27,7 +27,7 @@ Then install the gem with Bundler
 Then add the gem to your Jekyll configuration.
 
     gems:
-      -octopress-linkblog
+      - octopress-linkblog
 
 ## Usage
 
