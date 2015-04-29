@@ -9,7 +9,7 @@ exclude:
   - Gemfile*
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 gems:
   - octopress-linkblog
 
