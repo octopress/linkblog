@@ -37,7 +37,8 @@ module Octopress
       end
 
       def add_post_vars(post)
-        linkpost = post.data['external-url']
+        # Grab external url from post data, reading dashed value for legacy pattern support
+        linkpost = post.data['external_url'] || post.data['external-url']
 
         post.data['title'].titlecase! if Linkblog.config['titlecase']
 

@@ -48,7 +48,7 @@ Here is an example. Given the following YAML front-matter:
 ```
 ---
 title: cats are awesome
-external-url: http://cats.example.com
+external_url: http://cats.example.com
 ---
 ```
 
@@ -72,7 +72,7 @@ Note: the `<a>` in this demo has been shortened, but it will contain the `title_
 In addition, the site payload will have two new post arrays:
 
 - `site.articles` - Will contain standard posts only.
-- `site.linkposts` - Will contain only posts with an `external-url`
+- `site.linkposts` - Will contain only posts with an `external_url`
 
 This may have many uses, but one in particular is the option to allow RSS feeds for each type
 of post.
