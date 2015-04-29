@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.0.2 - 2015-04-29
+- Minor: Now reading `external_url` as default configuration (still supporting `external-url`).
+
 ### 2.0.1 - 2015-01-06
 - Fix: Added support for site baseurl configuration.
 
