@@ -2,39 +2,31 @@ require 'octopress-linkblog/version'
 require 'octopress-linkblog/configuration'
 require 'titlecase'
 
-require 'octopress-hooks'
-
 module Octopress
   module Linkblog
 
-    class SiteHook < Hooks::Site
-      def pre_read(site)
-        Linkblog.config(site.config)
-      end
+    Jekyll::Hooks.register :site, :after_reset do |site|
+      Linkblog.config(site.config)
+    end
 
-      def merge_payload(payload, site)
-        {
-          'site' => {
-            'linkposts' => site.posts.select {|p| p.data['linkpost']},
-            'articles'  => site.posts.reject {|p| p.data['linkpost']}
-          }
-        }
+    Jekyll::Hooks.register :site, :pre_render do |site, payload|
+      payload['site']['linkposts'] = site.posts.select {|p| p.data['linkpost']}
+      payload['site']['articles'] = site.posts.reject {|p| p.data['linkpost']}
+    end
+
+
+    Jekyll::Hooks.register :page, :post_init do |page|
+      if page.data['title']
+        page.data['title'].titlecase! if Linkblog.config['titlecase']
+        page.data['title_html'] = Linkblog.unorphan(page.data['title'])
       end
     end
 
-    class PageHook < Hooks::Page
-      def post_init(page)
-        if page.data['title']
-          page.data['title'].titlecase! if Linkblog.config['titlecase']
-          page.data['title_html'] = Linkblog.unorphan(page.data['title'])
-        end
-      end
+    Jekyll::Hooks.register :post, :post_init do |post|
+      Linkblog.add_post_vars(post)
     end
 
-    class PostHook < Hooks::Post
-      def post_init(post)
-        add_post_vars(post)
-      end
+    class << self
 
       def add_post_vars(post)
         # Grab external url from post data, reading dashed value for legacy pattern support
@@ -60,51 +52,50 @@ module Octopress
         post
       end
 
-    end
+      def unorphan(title)
+        if Linkblog.config['unorphan']
+          title.sub(/\s+(\S+)\s*$/, '&nbsp;\1')
+        else
+          title
+        end
+      end
 
-    def self.unorphan(title)
-      if Linkblog.config['unorphan']
-        title.sub(/\s+(\S+)\s*$/, '&nbsp;\1')
-      else
+      def post_title_html(title, config)
+        title = unorphan(title)
+
+        return title if !config['marker']
+
+        marker = "<span class='post-marker post-marker-#{config['marker_position']}'>#{config['marker']}</span>"
+        position = config['marker_position']
+
+        if config['marker_position'] == 'before'
+          title = "#{marker}&nbsp;#{title}"
+        else
+          title = "#{title}&nbsp;#{marker}"
+        end
+
         title
       end
-    end
 
-    def self.post_title_html(title, config)
-      title = unorphan(title)
-
-      return title if !config['marker']
-
-      marker = "<span class='post-marker post-marker-#{config['marker_position']}'>#{config['marker']}</span>"
-      position = config['marker_position']
-
-      if config['marker_position'] == 'before'
-        title = "#{marker}&nbsp;#{title}"
-      else
-        title = "#{title}&nbsp;#{marker}"
+      def post_title_link(data)
+        classname = "article-link"
+        classname << " linkpost" if data['linkpost']
+        post_link(data['title_html'], data['title_url'], classname)
       end
 
-      title
-    end
+      def post_link(title, url, classnames)
+        "<a href='#{url}' class='#{classnames}'>#{title}</a>"
+      end
 
-    def self.post_title_link(data)
-      classname = "article-link"
-      classname << " linkpost" if data['linkpost']
-      post_link(data['title_html'], data['title_url'], classname)
-    end
+      def post_title_text(title, config)
+        return title if !config['marker']
+        position = config['marker_position']
 
-    def self.post_link(title, url, classnames)
-      "<a href='#{url}' class='#{classnames}'>#{title}</a>"
-    end
-
-    def self.post_title_text(title, config)
-      return title if !config['marker']
-      position = config['marker_position']
-
-      if config['marker_position'] == 'before'
-        "#{config['marker']} #{title}"
-      else
-        "#{title} #{config['marker']}"
+        if config['marker_position'] == 'before'
+          "#{config['marker']} #{title}"
+        else
+          "#{title} #{config['marker']}"
+        end
       end
     end
   end

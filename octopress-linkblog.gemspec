@@ -9,7 +9,6 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Brandon Mathis"]
   spec.email         = ["brandon@imathis.com"]
   spec.summary       = %q{Add linkblog features to your Jekyll site.}
-  spec.description   = %q{Add linkblog features to your Jekyll site.}
   spec.homepage      = "https://github.com/octopress/linkblog"
   spec.license       = "MIT"
 
@@ -18,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "octopress-hooks", "~> 2.1"
+  spec.add_runtime_dependency "jekyll", ">= 3.0.0.a", "< 4"
   spec.add_runtime_dependency "titlecase"
 
   spec.add_development_dependency "bundler", "~> 1.6"
