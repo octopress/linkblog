@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0 - UNRELEASED
+- Mmmm, loving that Jekyll 3 flavor.
+- Now using Jekyll Hooks instead of Octopress Hooks.
+
 ### 2.0.2 - 2015-04-29
 - Minor: Now reading `external_url` as default configuration (still supporting `external-url`).
 
