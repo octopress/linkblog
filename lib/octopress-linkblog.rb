@@ -10,8 +10,8 @@ module Octopress
     end
 
     Jekyll::Hooks.register :site, :pre_render do |site, payload|
-      payload['site']['linkposts'] = site.posts.select {|p| p.data['linkpost']}
-      payload['site']['articles'] = site.posts.reject {|p| p.data['linkpost']}
+      payload['site']['linkposts'] = site.posts.docs.select {|p| p.data['linkpost']}
+      payload['site']['articles'] = site.posts.docs.reject {|p| p.data['linkpost']}
     end
 
 
